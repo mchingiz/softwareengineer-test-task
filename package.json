@@ -5,7 +5,9 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=dist/proto/ proto/*.proto"
+    "build-and-run": "npx tsc && node dist/src/index.js",
+    "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
+    "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto"
   },
   "repository": {
     "type": "git",
@@ -19,9 +21,16 @@
   "homepage": "https://github.com/mchingiz/softwareengineer-test-task#readme",
   "dependencies": {
     "@grpc/grpc-js": "^1.8.0",
+    "@grpc/proto-loader": "^0.7.4",
     "@types/google-protobuf": "^3.15.6",
-    "google-protobuf": "^3.21.2",
-    "tsc": "^2.0.4",
+    "grpc-web": "^1.4.2"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "grpc_tools_node_protoc_ts": "^5.3.2",
+    "grpc-tools": "^1.12.3",
+    "parcel": "^2.8.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   }
 }
