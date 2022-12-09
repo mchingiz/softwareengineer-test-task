@@ -1,14 +1,14 @@
 syntax = "proto3";
 
+package klausapp;
+
 import 'google/protobuf/timestamp.proto';
 
-package services.mainservice.v1;
-
-service Mainservice {
-  rpc GetCategoryScoreOverTimePeriod (TimePeriod) returns (CategoryScoreOverTimePeriod);
-  rpc GetTicketScoreOverTimePeriod (TimePeriod) returns (TicketScoreOverTimePeriod);
-  rpc GetOverallScore (TimePeriod) returns (OverallScore);
-  rpc GetScoreChangePoP (GetScoreChangePoPRequest) returns (ScoreChangePoP);
+service Klaus {
+  rpc getCategoryScoreOverTimePeriod (TimePeriod) returns (CategoryScoreOverTimePeriod);
+  rpc getTicketScoreOverTimePeriod (TimePeriod) returns (TicketScoreOverTimePeriod);
+  rpc getOverallScore (TimePeriod) returns (OverallScore);
+  rpc getScoreChangePoP (GetScoreChangePoPRequest) returns (ScoreChangePoP);
 }
 
 message TimePeriod {
