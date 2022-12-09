@@ -1,0 +1,27 @@
+{
+  "name": "softwareengineer-test-task",
+  "version": "1.0.0",
+  "description": "As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=dist/proto/ proto/*.proto"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mchingiz/softwareengineer-test-task.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mchingiz/softwareengineer-test-task/issues"
+  },
+  "homepage": "https://github.com/mchingiz/softwareengineer-test-task#readme",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.0",
+    "@types/google-protobuf": "^3.15.6",
+    "google-protobuf": "^3.21.2",
+    "tsc": "^2.0.4",
+    "typescript": "^4.9.4"
+  }
+}

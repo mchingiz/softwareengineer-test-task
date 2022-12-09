@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+import 'google/protobuf/timestamp.proto';
+
+package services.mainservice.v1;
+
+service Mainservice {
+  rpc GetCategoryScoreOverTimePeriod (TimePeriod) returns (CategoryScoreOverTimePeriod);
+  rpc GetTicketScoreOverTimePeriod (TimePeriod) returns (TicketScoreOverTimePeriod);
+  rpc GetOverallScore (TimePeriod) returns (OverallScore);
+  rpc GetScoreChangePoP (GetScoreChangePoPRequest) returns (ScoreChangePoP);
+}
+
+message TimePeriod {
+  google.protobuf.Timestamp startDate = 1;
+  google.protobuf.Timestamp endDate = 2;
+}
+
+message Category {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Ticket {
+  int32 id = 1;
+  string name = 2;
+}
+
+message DateScore {
+  google.protobuf.Timestamp date = 1;
+  int32 score = 2;
+}
+
+message CategoryScore {
+  Category category = 1;
+  int32 score = 2;
+}
+
+message CategoryScoreOverTimePeriod {
+  Category category = 1;
+  int32 ratingCount = 2;
+  repeated DateScore scoreByDate = 3;
+  int32 overallScore = 4;
+}
+
+message TicketScoreOverTimePeriod {
+  Ticket ticket = 1;
+  repeated CategoryScore scoreByCategories = 2;
+}
+
+message GetScoreChangePoPRequest {
+  TimePeriod firstPeriod = 1;
+  TimePeriod secondPeriod = 2;
+}
+
+message OverallScore {
+  int32 score = 1;
+}
+
+message ScoreChangePoP {
+  int32 scoreChange = 1;
+}
