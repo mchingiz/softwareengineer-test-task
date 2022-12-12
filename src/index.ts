@@ -1,6 +1,6 @@
 import { Server, ServerCredentials } from "@grpc/grpc-js";
 import { KlausService } from "../server/proto/klausapp_grpc_pb";
-import { KlausServer } from "./services"
+import { KlausServer } from "./services";
 
 const server = new Server();
 server.addService(KlausService, KlausServer);

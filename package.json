@@ -4,6 +4,8 @@
   "description": "As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).",
   "main": "src/index.ts",
   "scripts": {
+    "nodemon": "nodemon src/index.ts",
+    "sandbox": "nodemon sandbox.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-and-run": "npx tsc && node dist/src/index.js",
     "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
@@ -23,8 +25,11 @@
     "@grpc/grpc-js": "^1.8.0",
     "@grpc/proto-loader": "^0.7.4",
     "@types/google-protobuf": "^3.15.6",
+    "@types/lodash": "^4.14.191",
     "grpc-web": "^1.4.2",
     "knex": "^2.3.0",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.20",
     "objection": "^3.0.1",
     "sqlite3": "^5.1.2"
   },
