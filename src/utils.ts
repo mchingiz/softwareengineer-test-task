@@ -1,4 +1,4 @@
-import {sendUnaryData, Server, ServerErrorResponse} from "@grpc/grpc-js";
+import {ServerErrorResponse} from "@grpc/grpc-js";
 import {CustomError} from "./Error";
 import {TimePeriod} from "../server/proto/klausapp_pb";
 import {Timestamp} from "google-protobuf/google/protobuf/timestamp_pb";
@@ -46,7 +46,7 @@ export function validateTimePeriod(timePeriod: TimePeriod | undefined) : Array<T
 }
 
 
-export function mapErrorToResponse(err: any) : ServerErrorResponse {
+export function mapErrorToResponse(err: Error) : ServerErrorResponse {
     if (err instanceof CustomError) {
         return {
             message: err.message,
@@ -55,7 +55,7 @@ export function mapErrorToResponse(err: any) : ServerErrorResponse {
     }
 
     return {
-        message: 'Something went wrong',
+        message: 'Oops! Something went wrong',
         code: 2,
     } as ServerErrorResponse;
 }

@@ -21,8 +21,8 @@ export async function getTicketScore(
         // TODO: make a separate function for nested group bys
         const ratingsByTicket = (ratingRows as Array<any>).reduce(
             (aggregator, row) => {
-                if (aggregator.hasOwnProperty(row.ticket_id)) {
-                    if (aggregator[row.ticket_id].hasOwnProperty(row.category_id)) {
+                if (_.has(aggregator, row.ticket_id)) {
+                    if (_.has(aggregator[row.ticket_id],row.category_id)) {
                         aggregator[row.ticket_id][row.category_id].push(row);
                     } else {
                         aggregator[row.ticket_id][row.category_id] = [row];

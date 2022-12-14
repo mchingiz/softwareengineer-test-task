@@ -12,7 +12,7 @@ export class Db {
 
     public getRatingsWithCategories(startTime: string | number, endTime: string | number) {
         return this.knexClient.raw(
-            'SELECT *' +
+            'sSELECT *' +
             ' FROM ratings as r' +
             ' LEFT JOIN rating_categories as c' +
             ' ON r.rating_category_id = c.id' +

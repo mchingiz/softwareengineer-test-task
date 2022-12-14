@@ -36,8 +36,8 @@ export async function getCategoryScore(
                 const categoryId = row.rating_category_id;
                 const interval: string = new Date(row.created_at).toLocaleDateString('en-EN');
 
-                if (aggregator.hasOwnProperty(categoryId)) {
-                    if (aggregator[categoryId].hasOwnProperty(interval)) {
+                if (_.has(aggregator, categoryId)) {
+                    if (_.has(aggregator[categoryId],interval)) {
                         aggregator[categoryId]['ratingsByInterval'][interval].push(row);
                     } else {
                         aggregator[categoryId]['ratingsByInterval'][interval] = [row];
