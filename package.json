@@ -9,7 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-and-run": "npx tsc && node dist/src/index.js",
     "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
-    "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto"
+    "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto",
+    "prettier": "npx prettier --write .",
+    "lint": "npx eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
