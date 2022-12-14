@@ -2,7 +2,7 @@
 
 
 export interface OverallScore {
-  'score'?: (number);
+  'score'?: (number | string);
 }
 
 export interface OverallScore__Output {

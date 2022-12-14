@@ -14,16 +14,12 @@ export interface ProtoGrpcType {
     }
   }
   klausapp: {
-    Category: MessageTypeDefinition
-    CategoryScore: MessageTypeDefinition
-    CategoryScoreOverTimePeriod: MessageTypeDefinition
-    DateScore: MessageTypeDefinition
+    CategoryScoreByInterval: MessageTypeDefinition
     GetScoreChangePoPRequest: MessageTypeDefinition
     Klaus: SubtypeConstructor<typeof grpc.Client, _klausapp_KlausClient> & { service: _klausapp_KlausDefinition }
     OverallScore: MessageTypeDefinition
     ScoreChangePoP: MessageTypeDefinition
-    Ticket: MessageTypeDefinition
-    TicketScoreOverTimePeriod: MessageTypeDefinition
+    TicketScoreByCategory: MessageTypeDefinition
     TimePeriod: MessageTypeDefinition
   }
 }

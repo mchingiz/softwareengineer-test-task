@@ -46,7 +46,7 @@ export function validateTimePeriod(timePeriod: TimePeriod | undefined) : Array<T
 }
 
 
-export function getErrorResponse(err: any) : ServerErrorResponse {
+export function mapErrorToResponse(err: any) : ServerErrorResponse {
     if (err instanceof CustomError) {
         return {
             message: err.message,

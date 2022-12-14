@@ -2,7 +2,7 @@
 
 
 export interface ScoreChangePoP {
-  'scoreChange'?: (number);
+  'scoreChange'?: (number | string);
 }
 
 export interface ScoreChangePoP__Output {

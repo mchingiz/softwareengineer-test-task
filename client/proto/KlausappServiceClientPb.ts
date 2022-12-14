@@ -39,90 +39,48 @@ export class KlausClient {
     this.options_ = options;
   }
 
-  methodDescriptorgetCategoryScoreOverTimePeriod = new grpcWeb.MethodDescriptor(
-    '/klausapp.Klaus/getCategoryScoreOverTimePeriod',
-    grpcWeb.MethodType.UNARY,
+  methodDescriptorgetCategoryScore = new grpcWeb.MethodDescriptor(
+    '/klausapp.Klaus/getCategoryScore',
+    grpcWeb.MethodType.SERVER_STREAMING,
     klausapp_pb.TimePeriod,
-    klausapp_pb.CategoryScoreOverTimePeriod,
+    klausapp_pb.CategoryScoreByInterval,
     (request: klausapp_pb.TimePeriod) => {
       return request.serializeBinary();
     },
-    klausapp_pb.CategoryScoreOverTimePeriod.deserializeBinary
+    klausapp_pb.CategoryScoreByInterval.deserializeBinary
   );
 
-  getCategoryScoreOverTimePeriod(
+  getCategoryScore(
     request: klausapp_pb.TimePeriod,
-    metadata: grpcWeb.Metadata | null): Promise<klausapp_pb.CategoryScoreOverTimePeriod>;
-
-  getCategoryScoreOverTimePeriod(
-    request: klausapp_pb.TimePeriod,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpcWeb.ClientReadableStream<klausapp_pb.CategoryScoreOverTimePeriod>;
-
-  getCategoryScoreOverTimePeriod(
-    request: klausapp_pb.TimePeriod,
-    metadata: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: klausapp_pb.CategoryScoreOverTimePeriod) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/klausapp.Klaus/getCategoryScoreOverTimePeriod',
-        request,
-        metadata || {},
-        this.methodDescriptorgetCategoryScoreOverTimePeriod,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/klausapp.Klaus/getCategoryScoreOverTimePeriod',
-    request,
-    metadata || {},
-    this.methodDescriptorgetCategoryScoreOverTimePeriod);
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<klausapp_pb.CategoryScoreByInterval> {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/klausapp.Klaus/getCategoryScore',
+      request,
+      metadata || {},
+      this.methodDescriptorgetCategoryScore);
   }
 
-  methodDescriptorgetTicketScoreOverTimePeriod = new grpcWeb.MethodDescriptor(
-    '/klausapp.Klaus/getTicketScoreOverTimePeriod',
-    grpcWeb.MethodType.UNARY,
+  methodDescriptorgetTicketScore = new grpcWeb.MethodDescriptor(
+    '/klausapp.Klaus/getTicketScore',
+    grpcWeb.MethodType.SERVER_STREAMING,
     klausapp_pb.TimePeriod,
-    klausapp_pb.TicketScoreOverTimePeriod,
+    klausapp_pb.TicketScoreByCategory,
     (request: klausapp_pb.TimePeriod) => {
       return request.serializeBinary();
     },
-    klausapp_pb.TicketScoreOverTimePeriod.deserializeBinary
+    klausapp_pb.TicketScoreByCategory.deserializeBinary
   );
 
-  getTicketScoreOverTimePeriod(
+  getTicketScore(
     request: klausapp_pb.TimePeriod,
-    metadata: grpcWeb.Metadata | null): Promise<klausapp_pb.TicketScoreOverTimePeriod>;
-
-  getTicketScoreOverTimePeriod(
-    request: klausapp_pb.TimePeriod,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: klausapp_pb.TicketScoreOverTimePeriod) => void): grpcWeb.ClientReadableStream<klausapp_pb.TicketScoreOverTimePeriod>;
-
-  getTicketScoreOverTimePeriod(
-    request: klausapp_pb.TimePeriod,
-    metadata: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: klausapp_pb.TicketScoreOverTimePeriod) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/klausapp.Klaus/getTicketScoreOverTimePeriod',
-        request,
-        metadata || {},
-        this.methodDescriptorgetTicketScoreOverTimePeriod,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/klausapp.Klaus/getTicketScoreOverTimePeriod',
-    request,
-    metadata || {},
-    this.methodDescriptorgetTicketScoreOverTimePeriod);
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<klausapp_pb.TicketScoreByCategory> {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/klausapp.Klaus/getTicketScore',
+      request,
+      metadata || {},
+      this.methodDescriptorgetTicketScore);
   }
 
   methodDescriptorgetOverallScore = new grpcWeb.MethodDescriptor(

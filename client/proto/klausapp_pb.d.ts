@@ -29,155 +29,123 @@ export namespace TimePeriod {
   }
 }
 
-export class Category extends jspb.Message {
-  getId(): number;
-  setId(value: number): Category;
-
+export class CategoryScoreByInterval extends jspb.Message {
   getName(): string;
-  setName(value: string): Category;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Category.AsObject;
-  static toObject(includeInstance: boolean, msg: Category): Category.AsObject;
-  static serializeBinaryToWriter(message: Category, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Category;
-  static deserializeBinaryFromReader(message: Category, reader: jspb.BinaryReader): Category;
-}
-
-export namespace Category {
-  export type AsObject = {
-    id: number,
-    name: string,
-  }
-}
-
-export class Ticket extends jspb.Message {
-  getId(): number;
-  setId(value: number): Ticket;
-
-  getName(): string;
-  setName(value: string): Ticket;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Ticket.AsObject;
-  static toObject(includeInstance: boolean, msg: Ticket): Ticket.AsObject;
-  static serializeBinaryToWriter(message: Ticket, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Ticket;
-  static deserializeBinaryFromReader(message: Ticket, reader: jspb.BinaryReader): Ticket;
-}
-
-export namespace Ticket {
-  export type AsObject = {
-    id: number,
-    name: string,
-  }
-}
-
-export class DateScore extends jspb.Message {
-  getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setDate(value?: google_protobuf_timestamp_pb.Timestamp): DateScore;
-  hasDate(): boolean;
-  clearDate(): DateScore;
-
-  getScore(): number;
-  setScore(value: number): DateScore;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DateScore.AsObject;
-  static toObject(includeInstance: boolean, msg: DateScore): DateScore.AsObject;
-  static serializeBinaryToWriter(message: DateScore, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DateScore;
-  static deserializeBinaryFromReader(message: DateScore, reader: jspb.BinaryReader): DateScore;
-}
-
-export namespace DateScore {
-  export type AsObject = {
-    date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-    score: number,
-  }
-}
-
-export class CategoryScore extends jspb.Message {
-  getCategory(): Category | undefined;
-  setCategory(value?: Category): CategoryScore;
-  hasCategory(): boolean;
-  clearCategory(): CategoryScore;
-
-  getScore(): number;
-  setScore(value: number): CategoryScore;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CategoryScore.AsObject;
-  static toObject(includeInstance: boolean, msg: CategoryScore): CategoryScore.AsObject;
-  static serializeBinaryToWriter(message: CategoryScore, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CategoryScore;
-  static deserializeBinaryFromReader(message: CategoryScore, reader: jspb.BinaryReader): CategoryScore;
-}
-
-export namespace CategoryScore {
-  export type AsObject = {
-    category?: Category.AsObject,
-    score: number,
-  }
-}
-
-export class CategoryScoreOverTimePeriod extends jspb.Message {
-  getCategory(): Category | undefined;
-  setCategory(value?: Category): CategoryScoreOverTimePeriod;
-  hasCategory(): boolean;
-  clearCategory(): CategoryScoreOverTimePeriod;
+  setName(value: string): CategoryScoreByInterval;
 
   getRatingcount(): number;
-  setRatingcount(value: number): CategoryScoreOverTimePeriod;
+  setRatingcount(value: number): CategoryScoreByInterval;
 
-  getScorebydateList(): Array<DateScore>;
-  setScorebydateList(value: Array<DateScore>): CategoryScoreOverTimePeriod;
-  clearScorebydateList(): CategoryScoreOverTimePeriod;
-  addScorebydate(value?: DateScore, index?: number): DateScore;
+  getScorebyintervalList(): Array<CategoryScoreByInterval.IntervalScore>;
+  setScorebyintervalList(value: Array<CategoryScoreByInterval.IntervalScore>): CategoryScoreByInterval;
+  clearScorebyintervalList(): CategoryScoreByInterval;
+  addScorebyinterval(value?: CategoryScoreByInterval.IntervalScore, index?: number): CategoryScoreByInterval.IntervalScore;
 
   getOverallscore(): number;
-  setOverallscore(value: number): CategoryScoreOverTimePeriod;
+  setOverallscore(value: number): CategoryScoreByInterval;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CategoryScoreOverTimePeriod.AsObject;
-  static toObject(includeInstance: boolean, msg: CategoryScoreOverTimePeriod): CategoryScoreOverTimePeriod.AsObject;
-  static serializeBinaryToWriter(message: CategoryScoreOverTimePeriod, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CategoryScoreOverTimePeriod;
-  static deserializeBinaryFromReader(message: CategoryScoreOverTimePeriod, reader: jspb.BinaryReader): CategoryScoreOverTimePeriod;
+  toObject(includeInstance?: boolean): CategoryScoreByInterval.AsObject;
+  static toObject(includeInstance: boolean, msg: CategoryScoreByInterval): CategoryScoreByInterval.AsObject;
+  static serializeBinaryToWriter(message: CategoryScoreByInterval, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CategoryScoreByInterval;
+  static deserializeBinaryFromReader(message: CategoryScoreByInterval, reader: jspb.BinaryReader): CategoryScoreByInterval;
 }
 
-export namespace CategoryScoreOverTimePeriod {
+export namespace CategoryScoreByInterval {
   export type AsObject = {
-    category?: Category.AsObject,
+    name: string,
     ratingcount: number,
-    scorebydateList: Array<DateScore.AsObject>,
+    scorebyintervalList: Array<CategoryScoreByInterval.IntervalScore.AsObject>,
     overallscore: number,
   }
+
+  export class IntervalScore extends jspb.Message {
+    getInterval(): string;
+    setInterval(value: string): IntervalScore;
+
+    getScore(): number;
+    setScore(value: number): IntervalScore;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): IntervalScore.AsObject;
+    static toObject(includeInstance: boolean, msg: IntervalScore): IntervalScore.AsObject;
+    static serializeBinaryToWriter(message: IntervalScore, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): IntervalScore;
+    static deserializeBinaryFromReader(message: IntervalScore, reader: jspb.BinaryReader): IntervalScore;
+  }
+
+  export namespace IntervalScore {
+    export type AsObject = {
+      interval: string,
+      score: number,
+    }
+  }
+
 }
 
-export class TicketScoreOverTimePeriod extends jspb.Message {
-  getTicket(): Ticket | undefined;
-  setTicket(value?: Ticket): TicketScoreOverTimePeriod;
-  hasTicket(): boolean;
-  clearTicket(): TicketScoreOverTimePeriod;
+export class TicketScoreByCategory extends jspb.Message {
+  getTicketid(): number;
+  setTicketid(value: number): TicketScoreByCategory;
 
-  getScorebycategoriesList(): Array<CategoryScore>;
-  setScorebycategoriesList(value: Array<CategoryScore>): TicketScoreOverTimePeriod;
-  clearScorebycategoriesList(): TicketScoreOverTimePeriod;
-  addScorebycategories(value?: CategoryScore, index?: number): CategoryScore;
+  getCategoryscoresList(): Array<TicketScoreByCategory.CategoryScore>;
+  setCategoryscoresList(value: Array<TicketScoreByCategory.CategoryScore>): TicketScoreByCategory;
+  clearCategoryscoresList(): TicketScoreByCategory;
+  addCategoryscores(value?: TicketScoreByCategory.CategoryScore, index?: number): TicketScoreByCategory.CategoryScore;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): TicketScoreOverTimePeriod.AsObject;
-  static toObject(includeInstance: boolean, msg: TicketScoreOverTimePeriod): TicketScoreOverTimePeriod.AsObject;
-  static serializeBinaryToWriter(message: TicketScoreOverTimePeriod, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): TicketScoreOverTimePeriod;
-  static deserializeBinaryFromReader(message: TicketScoreOverTimePeriod, reader: jspb.BinaryReader): TicketScoreOverTimePeriod;
+  toObject(includeInstance?: boolean): TicketScoreByCategory.AsObject;
+  static toObject(includeInstance: boolean, msg: TicketScoreByCategory): TicketScoreByCategory.AsObject;
+  static serializeBinaryToWriter(message: TicketScoreByCategory, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TicketScoreByCategory;
+  static deserializeBinaryFromReader(message: TicketScoreByCategory, reader: jspb.BinaryReader): TicketScoreByCategory;
 }
 
-export namespace TicketScoreOverTimePeriod {
+export namespace TicketScoreByCategory {
   export type AsObject = {
-    ticket?: Ticket.AsObject,
-    scorebycategoriesList: Array<CategoryScore.AsObject>,
+    ticketid: number,
+    categoryscoresList: Array<TicketScoreByCategory.CategoryScore.AsObject>,
+  }
+
+  export class CategoryScore extends jspb.Message {
+    getName(): string;
+    setName(value: string): CategoryScore;
+
+    getScore(): number;
+    setScore(value: number): CategoryScore;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): CategoryScore.AsObject;
+    static toObject(includeInstance: boolean, msg: CategoryScore): CategoryScore.AsObject;
+    static serializeBinaryToWriter(message: CategoryScore, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): CategoryScore;
+    static deserializeBinaryFromReader(message: CategoryScore, reader: jspb.BinaryReader): CategoryScore;
+  }
+
+  export namespace CategoryScore {
+    export type AsObject = {
+      name: string,
+      score: number,
+    }
+  }
+
+}
+
+export class OverallScore extends jspb.Message {
+  getScore(): number;
+  setScore(value: number): OverallScore;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): OverallScore.AsObject;
+  static toObject(includeInstance: boolean, msg: OverallScore): OverallScore.AsObject;
+  static serializeBinaryToWriter(message: OverallScore, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): OverallScore;
+  static deserializeBinaryFromReader(message: OverallScore, reader: jspb.BinaryReader): OverallScore;
+}
+
+export namespace OverallScore {
+  export type AsObject = {
+    score: number,
   }
 }
 
@@ -204,24 +172,6 @@ export namespace GetScoreChangePoPRequest {
   export type AsObject = {
     firstperiod?: TimePeriod.AsObject,
     secondperiod?: TimePeriod.AsObject,
-  }
-}
-
-export class OverallScore extends jspb.Message {
-  getScore(): number;
-  setScore(value: number): OverallScore;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): OverallScore.AsObject;
-  static toObject(includeInstance: boolean, msg: OverallScore): OverallScore.AsObject;
-  static serializeBinaryToWriter(message: OverallScore, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): OverallScore;
-  static deserializeBinaryFromReader(message: OverallScore, reader: jspb.BinaryReader): OverallScore;
-}
-
-export namespace OverallScore {
-  export type AsObject = {
-    score: number,
   }
 }
 

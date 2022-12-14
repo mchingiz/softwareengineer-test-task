@@ -1,12 +1,13 @@
 import {ServerWritableStream} from "@grpc/grpc-js";
-import {CategoryScore, TicketScoreByCategory, TimePeriod} from "../../server/proto/klausapp_pb";
-import {getErrorResponse, validateTimePeriod} from "../utils";
+import {TicketScoreByCategory, TimePeriod} from "../../server/proto/klausapp_pb";
+import {mapErrorToResponse, validateTimePeriod} from "../utils";
 import _ from "lodash";
 import {Db, getDb} from "../db";
+import CategoryScore = TicketScoreByCategory.CategoryScore;
 
 const db: Db = getDb();
 
-export async function getTicketScoreOverTimePeriod(
+export async function getTicketScore(
     call: ServerWritableStream<TimePeriod, TicketScoreByCategory>
 ) {
     try {
@@ -62,6 +63,6 @@ export async function getTicketScoreOverTimePeriod(
 
         call.end();
     } catch (err: any) {
-        call.destroy(getErrorResponse(err));
+        call.destroy(mapErrorToResponse(err));
     }
 }

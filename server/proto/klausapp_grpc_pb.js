@@ -5,15 +5,15 @@ var grpc = require('@grpc/grpc-js');
 var klausapp_pb = require('./klausapp_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 
-function serialize_klausapp_CategoryScoreOverTimePeriod(arg) {
-  if (!(arg instanceof klausapp_pb.CategoryScoreOverTimePeriod)) {
-    throw new Error('Expected argument of type klausapp.CategoryScoreOverTimePeriod');
+function serialize_klausapp_CategoryScoreByInterval(arg) {
+  if (!(arg instanceof klausapp_pb.CategoryScoreByInterval)) {
+    throw new Error('Expected argument of type klausapp.CategoryScoreByInterval');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_klausapp_CategoryScoreOverTimePeriod(buffer_arg) {
-  return klausapp_pb.CategoryScoreOverTimePeriod.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_klausapp_CategoryScoreByInterval(buffer_arg) {
+  return klausapp_pb.CategoryScoreByInterval.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_klausapp_GetScoreChangePoPRequest(arg) {
@@ -73,19 +73,19 @@ function deserialize_klausapp_TimePeriod(buffer_arg) {
 
 
 var KlausService = exports.KlausService = {
-  getCategoryScoreOverTimePeriod: {
-    path: '/klausapp.Klaus/getCategoryScoreOverTimePeriod',
+  getCategoryScore: {
+    path: '/klausapp.Klaus/getCategoryScore',
     requestStream: false,
-    responseStream: false,
+    responseStream: true,
     requestType: klausapp_pb.TimePeriod,
-    responseType: klausapp_pb.CategoryScoreOverTimePeriod,
+    responseType: klausapp_pb.CategoryScoreByInterval,
     requestSerialize: serialize_klausapp_TimePeriod,
     requestDeserialize: deserialize_klausapp_TimePeriod,
-    responseSerialize: serialize_klausapp_CategoryScoreOverTimePeriod,
-    responseDeserialize: deserialize_klausapp_CategoryScoreOverTimePeriod,
+    responseSerialize: serialize_klausapp_CategoryScoreByInterval,
+    responseDeserialize: deserialize_klausapp_CategoryScoreByInterval,
   },
-  getTicketScoreOverTimePeriod: {
-    path: '/klausapp.Klaus/getTicketScoreOverTimePeriod',
+  getTicketScore: {
+    path: '/klausapp.Klaus/getTicketScore',
     requestStream: false,
     responseStream: true,
     requestType: klausapp_pb.TimePeriod,

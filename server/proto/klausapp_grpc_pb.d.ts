@@ -9,23 +9,23 @@ import * as klausapp_pb from "./klausapp_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 interface IKlausService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
-    getCategoryScoreOverTimePeriod: IKlausService_IgetCategoryScoreOverTimePeriod;
-    getTicketScoreOverTimePeriod: IKlausService_IgetTicketScoreOverTimePeriod;
+    getCategoryScore: IKlausService_IgetCategoryScore;
+    getTicketScore: IKlausService_IgetTicketScore;
     getOverallScore: IKlausService_IgetOverallScore;
     getScoreChangePoP: IKlausService_IgetScoreChangePoP;
 }
 
-interface IKlausService_IgetCategoryScoreOverTimePeriod extends grpc.MethodDefinition<klausapp_pb.TimePeriod, klausapp_pb.CategoryScoreOverTimePeriod> {
-    path: "/klausapp.Klaus/getCategoryScoreOverTimePeriod";
+interface IKlausService_IgetCategoryScore extends grpc.MethodDefinition<klausapp_pb.TimePeriod, klausapp_pb.CategoryScoreByInterval> {
+    path: "/klausapp.Klaus/getCategoryScore";
     requestStream: false;
-    responseStream: false;
+    responseStream: true;
     requestSerialize: grpc.serialize<klausapp_pb.TimePeriod>;
     requestDeserialize: grpc.deserialize<klausapp_pb.TimePeriod>;
-    responseSerialize: grpc.serialize<klausapp_pb.CategoryScoreOverTimePeriod>;
-    responseDeserialize: grpc.deserialize<klausapp_pb.CategoryScoreOverTimePeriod>;
+    responseSerialize: grpc.serialize<klausapp_pb.CategoryScoreByInterval>;
+    responseDeserialize: grpc.deserialize<klausapp_pb.CategoryScoreByInterval>;
 }
-interface IKlausService_IgetTicketScoreOverTimePeriod extends grpc.MethodDefinition<klausapp_pb.TimePeriod, klausapp_pb.TicketScoreByCategory> {
-    path: "/klausapp.Klaus/getTicketScoreOverTimePeriod";
+interface IKlausService_IgetTicketScore extends grpc.MethodDefinition<klausapp_pb.TimePeriod, klausapp_pb.TicketScoreByCategory> {
+    path: "/klausapp.Klaus/getTicketScore";
     requestStream: false;
     responseStream: true;
     requestSerialize: grpc.serialize<klausapp_pb.TimePeriod>;
@@ -55,18 +55,17 @@ interface IKlausService_IgetScoreChangePoP extends grpc.MethodDefinition<klausap
 export const KlausService: IKlausService;
 
 export interface IKlausServer extends grpc.UntypedServiceImplementation {
-    getCategoryScoreOverTimePeriod: grpc.handleUnaryCall<klausapp_pb.TimePeriod, klausapp_pb.CategoryScoreOverTimePeriod>;
-    getTicketScoreOverTimePeriod: grpc.handleServerStreamingCall<klausapp_pb.TimePeriod, klausapp_pb.TicketScoreByCategory>;
+    getCategoryScore: grpc.handleServerStreamingCall<klausapp_pb.TimePeriod, klausapp_pb.CategoryScoreByInterval>;
+    getTicketScore: grpc.handleServerStreamingCall<klausapp_pb.TimePeriod, klausapp_pb.TicketScoreByCategory>;
     getOverallScore: grpc.handleUnaryCall<klausapp_pb.TimePeriod, klausapp_pb.OverallScore>;
     getScoreChangePoP: grpc.handleUnaryCall<klausapp_pb.GetScoreChangePoPRequest, klausapp_pb.ScoreChangePoP>;
 }
 
 export interface IKlausClient {
-    getCategoryScoreOverTimePeriod(request: klausapp_pb.TimePeriod, callback: (error: grpc.ServiceError | null, response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpc.ClientUnaryCall;
-    getCategoryScoreOverTimePeriod(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpc.ClientUnaryCall;
-    getCategoryScoreOverTimePeriod(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpc.ClientUnaryCall;
-    getTicketScoreOverTimePeriod(request: klausapp_pb.TimePeriod, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
-    getTicketScoreOverTimePeriod(request: klausapp_pb.TimePeriod, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
+    getCategoryScore(request: klausapp_pb.TimePeriod, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.CategoryScoreByInterval>;
+    getCategoryScore(request: klausapp_pb.TimePeriod, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.CategoryScoreByInterval>;
+    getTicketScore(request: klausapp_pb.TimePeriod, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
+    getTicketScore(request: klausapp_pb.TimePeriod, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
     getOverallScore(request: klausapp_pb.TimePeriod, callback: (error: grpc.ServiceError | null, response: klausapp_pb.OverallScore) => void): grpc.ClientUnaryCall;
     getOverallScore(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: klausapp_pb.OverallScore) => void): grpc.ClientUnaryCall;
     getOverallScore(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: klausapp_pb.OverallScore) => void): grpc.ClientUnaryCall;
@@ -77,11 +76,10 @@ export interface IKlausClient {
 
 export class KlausClient extends grpc.Client implements IKlausClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: Partial<grpc.ClientOptions>);
-    public getCategoryScoreOverTimePeriod(request: klausapp_pb.TimePeriod, callback: (error: grpc.ServiceError | null, response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpc.ClientUnaryCall;
-    public getCategoryScoreOverTimePeriod(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpc.ClientUnaryCall;
-    public getCategoryScoreOverTimePeriod(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: klausapp_pb.CategoryScoreOverTimePeriod) => void): grpc.ClientUnaryCall;
-    public getTicketScoreOverTimePeriod(request: klausapp_pb.TimePeriod, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
-    public getTicketScoreOverTimePeriod(request: klausapp_pb.TimePeriod, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
+    public getCategoryScore(request: klausapp_pb.TimePeriod, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.CategoryScoreByInterval>;
+    public getCategoryScore(request: klausapp_pb.TimePeriod, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.CategoryScoreByInterval>;
+    public getTicketScore(request: klausapp_pb.TimePeriod, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
+    public getTicketScore(request: klausapp_pb.TimePeriod, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<klausapp_pb.TicketScoreByCategory>;
     public getOverallScore(request: klausapp_pb.TimePeriod, callback: (error: grpc.ServiceError | null, response: klausapp_pb.OverallScore) => void): grpc.ClientUnaryCall;
     public getOverallScore(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: klausapp_pb.OverallScore) => void): grpc.ClientUnaryCall;
     public getOverallScore(request: klausapp_pb.TimePeriod, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: klausapp_pb.OverallScore) => void): grpc.ClientUnaryCall;

@@ -1,6 +1,6 @@
 import {sendUnaryData, ServerUnaryCall} from "@grpc/grpc-js";
 import {GetScoreChangePoPRequest, ScoreChangePoP} from "../../server/proto/klausapp_pb";
-import {calculateWeightedScore, getErrorResponse, validateTimePeriod} from "../utils";
+import {calculateWeightedScore, mapErrorToResponse, validateTimePeriod} from "../utils";
 import {Db, getDb} from "../db";
 
 const db: Db = getDb();
@@ -28,11 +28,13 @@ export async function getScoreChangePoP(
         const secondPeriodOverallScore = calculateWeightedScore(ratingsForSecondPeriod);
 
         // TODO: make it float. Can be negative. Deal with it
-        scoreChangePoP.setScorechange(firstPeriodOverallScore/secondPeriodOverallScore * 100);
+        const change = (secondPeriodOverallScore-firstPeriodOverallScore)/firstPeriodOverallScore * 100;
+
+        scoreChangePoP.setScorechange(change);
 
         callback(null, scoreChangePoP);
     } catch (err: any) {
-        callback(getErrorResponse(err), null);
+        console.log(err)
+        callback(mapErrorToResponse(err), null);
     }
-    console.log('getScoreChangePoP: done');
 }

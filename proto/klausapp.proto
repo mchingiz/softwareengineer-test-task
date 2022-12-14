@@ -5,8 +5,8 @@ package klausapp;
 import 'google/protobuf/timestamp.proto';
 
 service Klaus {
-  rpc getCategoryScoreOverTimePeriod (TimePeriod) returns (CategoryScoreOverTimePeriod);
-  rpc getTicketScoreOverTimePeriod (TimePeriod) returns (stream TicketScoreByCategory);
+  rpc getCategoryScore (TimePeriod) returns (stream CategoryScoreByInterval);
+  rpc getTicketScore (TimePeriod) returns (stream TicketScoreByCategory);
   rpc getOverallScore (TimePeriod) returns (OverallScore);
   rpc getScoreChangePoP (GetScoreChangePoPRequest) returns (ScoreChangePoP);
 }
@@ -16,46 +16,46 @@ message TimePeriod {
   google.protobuf.Timestamp endDate = 2;
 }
 
-message Category {
+/* getCategoryScore */
+
+message CategoryScoreByInterval {
+  message IntervalScore {
+    string interval = 1;
+    float score = 2;
+  }
+
   int32 id = 1;
   string name = 2;
+  int32 ratingCount = 3;
+  repeated IntervalScore scoreByInterval = 4;
+  float overallScore = 5;
 }
 
-message DateScore {
-  google.protobuf.Timestamp date = 1;
-  int32 score = 2;
-}
-
-message CategoryScore {
-  string name = 1;
-  int32 score = 2;
-}
-
-message CategoryScoreOverTimePeriod {
-  Category category = 1;
-  int32 ratingCount = 2;
-  repeated DateScore scoreByDate = 3;
-  int32 overallScore = 4;
-}
+/* getTicketScore */
 
 message TicketScoreByCategory {
+  message CategoryScore {
+    string name = 1;
+    float score = 2;
+  }
+
   int32 ticketId = 1;
   repeated CategoryScore categoryScores = 2;
 }
 
-//message TicketScoreOverTimePeriod {
-//  repeated TicketScoreByCategory tickets = 1;
-//}
+/* getOverallScore */
+
+message OverallScore {
+  float score = 1;
+}
+
+/* getScoreChangePoP */
 
 message GetScoreChangePoPRequest {
   TimePeriod firstPeriod = 1;
   TimePeriod secondPeriod = 2;
 }
 
-message OverallScore {
-  int32 score = 1;
-}
-
 message ScoreChangePoP {
-  int32 scoreChange = 1;
+  float scoreChange = 1;
 }
