@@ -1,50 +1,50 @@
 {
-  "name": "softwareengineer-test-task",
-  "version": "1.0.0",
-  "description": "As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).",
-  "main": "src/index.ts",
-  "scripts": {
-    "nodemon": "nodemon src/index.ts",
-    "sandbox": "nodemon sandbox.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-and-run": "npx tsc && node dist/src/index.js",
-    "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
-    "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto",
-    "prettier": "npx prettier --write .",
-    "lint": "npx eslint . --ext .ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mchingiz/softwareengineer-test-task.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mchingiz/softwareengineer-test-task/issues"
-  },
-  "homepage": "https://github.com/mchingiz/softwareengineer-test-task#readme",
-  "dependencies": {
-    "@grpc/grpc-js": "^1.8.0",
-    "@grpc/proto-loader": "^0.7.4",
-    "@types/google-protobuf": "^3.15.6",
-    "@types/lodash": "^4.14.191",
-    "grpc-web": "^1.4.2",
-    "knex": "^2.3.0",
-    "lodash": "^4.17.21",
-    "nodemon": "^2.0.20",
-    "objection": "^3.0.1",
-    "sqlite3": "^5.1.2"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
-    "buffer": "^6.0.3",
-    "eslint": "^8.29.0",
-    "grpc_tools_node_protoc_ts": "^5.3.2",
-    "grpc-tools": "^1.12.3",
-    "parcel": "^2.8.1",
-    "prettier": "^2.8.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
-  }
+    "name": "softwareengineer-test-task",
+    "version": "1.0.0",
+    "description": "As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).",
+    "main": "src/index.ts",
+    "scripts": {
+        "nodemon": "nodemon src/index.ts",
+        "sandbox": "nodemon sandbox.ts",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build-and-run": "npx tsc && node dist/src/index.js",
+        "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
+        "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto",
+        "prettier": "npx prettier --write . --tab-width 4",
+        "lint": "npx eslint . --ext .ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mchingiz/softwareengineer-test-task.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mchingiz/softwareengineer-test-task/issues"
+    },
+    "homepage": "https://github.com/mchingiz/softwareengineer-test-task#readme",
+    "dependencies": {
+        "@grpc/grpc-js": "^1.8.0",
+        "@grpc/proto-loader": "^0.7.4",
+        "@types/google-protobuf": "^3.15.6",
+        "@types/lodash": "^4.14.191",
+        "grpc-web": "^1.4.2",
+        "knex": "^2.3.0",
+        "lodash": "^4.17.21",
+        "nodemon": "^2.0.20",
+        "objection": "^3.0.1",
+        "sqlite3": "^5.1.2"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.46.1",
+        "@typescript-eslint/parser": "^5.46.1",
+        "buffer": "^6.0.3",
+        "eslint": "^8.29.0",
+        "grpc_tools_node_protoc_ts": "^5.3.2",
+        "grpc-tools": "^1.12.3",
+        "parcel": "^2.8.1",
+        "prettier": "^2.8.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.4"
+    }
 }

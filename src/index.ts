@@ -9,6 +9,6 @@ const port = 9090;
 const uri = `0.0.0.0:${port}`;
 console.log(`Listening on ${uri}`);
 server.bindAsync(uri, ServerCredentials.createInsecure(), (err) => {
-  if (err) console.log(err);
-  server.start();
+    if (err) console.log(err);
+    server.start();
 });

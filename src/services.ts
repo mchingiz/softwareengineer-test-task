@@ -5,8 +5,8 @@ import { getScoreChangePoP } from "./endpoints/get-score-change-pop";
 import { getCategoryScore } from "./endpoints/get-category-score";
 
 export const KlausServer: IKlausServer = {
-  getOverallScore,
-  getTicketScore,
-  getScoreChangePoP,
-  getCategoryScore,
+    getOverallScore,
+    getTicketScore,
+    getScoreChangePoP,
+    getCategoryScore,
 };
