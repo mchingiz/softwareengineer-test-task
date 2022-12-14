@@ -1,4 +1,4 @@
-import {sendUnaryData, ServerErrorResponse } from "@grpc/grpc-js";
+import {sendUnaryData, Server, ServerErrorResponse} from "@grpc/grpc-js";
 import {CustomError} from "./Error";
 import {TimePeriod} from "../server/proto/klausapp_pb";
 import {Timestamp} from "google-protobuf/google/protobuf/timestamp_pb";
@@ -26,7 +26,11 @@ export function calculateWeightedScore(ratings: {rating: number, weight: number}
     return Math.floor(aggregated.totalScore/aggregated.totalWeight * 100);
 }
 
-export function validateTimePeriod(timePeriod: TimePeriod) : Array<Timestamp> {
+export function validateTimePeriod(timePeriod: TimePeriod | undefined) : Array<Timestamp> {
+    if(!timePeriod) {
+        throw new CustomError(3, `'timePeriod' is not supplied`)
+    }
+
     const startDate: Timestamp | undefined = timePeriod.getStartdate();
     const endDate: Timestamp | undefined = timePeriod.getEnddate();
 
@@ -41,20 +45,17 @@ export function validateTimePeriod(timePeriod: TimePeriod) : Array<Timestamp> {
     return [startDate,endDate];
 }
 
-export function errorHandler(err: any, callback: sendUnaryData<any>) : void {
-    let errorResponse: Partial<ServerErrorResponse>;
 
+export function getErrorResponse(err: any) : ServerErrorResponse {
     if (err instanceof CustomError) {
-        errorResponse = {
+        return {
             message: err.message,
             code: err.code,
-        }
-    } else {
-        errorResponse = {
-            message: 'Something went wrong',
-            code: 2,
-        };
+        } as ServerErrorResponse;
     }
 
-    callback(errorResponse, null);
+    return {
+        message: 'Something went wrong',
+        code: 2,
+    } as ServerErrorResponse;
 }

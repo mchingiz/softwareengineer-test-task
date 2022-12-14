@@ -59,29 +59,6 @@ export namespace Category {
     }
 }
 
-export class Ticket extends jspb.Message { 
-    getId(): number;
-    setId(value: number): Ticket;
-    getName(): string;
-    setName(value: string): Ticket;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): Ticket.AsObject;
-    static toObject(includeInstance: boolean, msg: Ticket): Ticket.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: Ticket, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): Ticket;
-    static deserializeBinaryFromReader(message: Ticket, reader: jspb.BinaryReader): Ticket;
-}
-
-export namespace Ticket {
-    export type AsObject = {
-        id: number,
-        name: string,
-    }
-}
-
 export class DateScore extends jspb.Message { 
 
     hasDate(): boolean;
@@ -109,11 +86,8 @@ export namespace DateScore {
 }
 
 export class CategoryScore extends jspb.Message { 
-
-    hasCategory(): boolean;
-    clearCategory(): void;
-    getCategory(): Category | undefined;
-    setCategory(value?: Category): CategoryScore;
+    getName(): string;
+    setName(value: string): CategoryScore;
     getScore(): number;
     setScore(value: number): CategoryScore;
 
@@ -129,7 +103,7 @@ export class CategoryScore extends jspb.Message {
 
 export namespace CategoryScore {
     export type AsObject = {
-        category?: Category.AsObject,
+        name: string,
         score: number,
     }
 }
@@ -168,31 +142,28 @@ export namespace CategoryScoreOverTimePeriod {
     }
 }
 
-export class TicketScoreOverTimePeriod extends jspb.Message { 
-
-    hasTicket(): boolean;
-    clearTicket(): void;
-    getTicket(): Ticket | undefined;
-    setTicket(value?: Ticket): TicketScoreOverTimePeriod;
-    clearScorebycategoriesList(): void;
-    getScorebycategoriesList(): Array<CategoryScore>;
-    setScorebycategoriesList(value: Array<CategoryScore>): TicketScoreOverTimePeriod;
-    addScorebycategories(value?: CategoryScore, index?: number): CategoryScore;
+export class TicketScoreByCategory extends jspb.Message { 
+    getTicketid(): number;
+    setTicketid(value: number): TicketScoreByCategory;
+    clearCategoryscoresList(): void;
+    getCategoryscoresList(): Array<CategoryScore>;
+    setCategoryscoresList(value: Array<CategoryScore>): TicketScoreByCategory;
+    addCategoryscores(value?: CategoryScore, index?: number): CategoryScore;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): TicketScoreOverTimePeriod.AsObject;
-    static toObject(includeInstance: boolean, msg: TicketScoreOverTimePeriod): TicketScoreOverTimePeriod.AsObject;
+    toObject(includeInstance?: boolean): TicketScoreByCategory.AsObject;
+    static toObject(includeInstance: boolean, msg: TicketScoreByCategory): TicketScoreByCategory.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: TicketScoreOverTimePeriod, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): TicketScoreOverTimePeriod;
-    static deserializeBinaryFromReader(message: TicketScoreOverTimePeriod, reader: jspb.BinaryReader): TicketScoreOverTimePeriod;
+    static serializeBinaryToWriter(message: TicketScoreByCategory, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TicketScoreByCategory;
+    static deserializeBinaryFromReader(message: TicketScoreByCategory, reader: jspb.BinaryReader): TicketScoreByCategory;
 }
 
-export namespace TicketScoreOverTimePeriod {
+export namespace TicketScoreByCategory {
     export type AsObject = {
-        ticket?: Ticket.AsObject,
-        scorebycategoriesList: Array<CategoryScore.AsObject>,
+        ticketid: number,
+        categoryscoresList: Array<CategoryScore.AsObject>,
     }
 }
 

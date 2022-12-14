@@ -6,7 +6,7 @@ import 'google/protobuf/timestamp.proto';
 
 service Klaus {
   rpc getCategoryScoreOverTimePeriod (TimePeriod) returns (CategoryScoreOverTimePeriod);
-  rpc getTicketScoreOverTimePeriod (TimePeriod) returns (TicketScoreOverTimePeriod);
+  rpc getTicketScoreOverTimePeriod (TimePeriod) returns (stream TicketScoreByCategory);
   rpc getOverallScore (TimePeriod) returns (OverallScore);
   rpc getScoreChangePoP (GetScoreChangePoPRequest) returns (ScoreChangePoP);
 }
@@ -21,18 +21,13 @@ message Category {
   string name = 2;
 }
 
-message Ticket {
-  int32 id = 1;
-  string name = 2;
-}
-
 message DateScore {
   google.protobuf.Timestamp date = 1;
   int32 score = 2;
 }
 
 message CategoryScore {
-  Category category = 1;
+  string name = 1;
   int32 score = 2;
 }
 
@@ -43,10 +38,14 @@ message CategoryScoreOverTimePeriod {
   int32 overallScore = 4;
 }
 
-message TicketScoreOverTimePeriod {
-  Ticket ticket = 1;
-  repeated CategoryScore scoreByCategories = 2;
+message TicketScoreByCategory {
+  int32 ticketId = 1;
+  repeated CategoryScore categoryScores = 2;
 }
+
+//message TicketScoreOverTimePeriod {
+//  repeated TicketScoreByCategory tickets = 1;
+//}
 
 message GetScoreChangePoPRequest {
   TimePeriod firstPeriod = 1;

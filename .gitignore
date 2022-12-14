@@ -131,3 +131,5 @@ dist
 
 # misc
 .idea/
+.DS_Store
+sandbox.ts

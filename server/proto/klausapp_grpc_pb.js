@@ -49,15 +49,15 @@ function deserialize_klausapp_ScoreChangePoP(buffer_arg) {
   return klausapp_pb.ScoreChangePoP.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_klausapp_TicketScoreOverTimePeriod(arg) {
-  if (!(arg instanceof klausapp_pb.TicketScoreOverTimePeriod)) {
-    throw new Error('Expected argument of type klausapp.TicketScoreOverTimePeriod');
+function serialize_klausapp_TicketScoreByCategory(arg) {
+  if (!(arg instanceof klausapp_pb.TicketScoreByCategory)) {
+    throw new Error('Expected argument of type klausapp.TicketScoreByCategory');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_klausapp_TicketScoreOverTimePeriod(buffer_arg) {
-  return klausapp_pb.TicketScoreOverTimePeriod.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_klausapp_TicketScoreByCategory(buffer_arg) {
+  return klausapp_pb.TicketScoreByCategory.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_klausapp_TimePeriod(arg) {
@@ -87,13 +87,13 @@ var KlausService = exports.KlausService = {
   getTicketScoreOverTimePeriod: {
     path: '/klausapp.Klaus/getTicketScoreOverTimePeriod',
     requestStream: false,
-    responseStream: false,
+    responseStream: true,
     requestType: klausapp_pb.TimePeriod,
-    responseType: klausapp_pb.TicketScoreOverTimePeriod,
+    responseType: klausapp_pb.TicketScoreByCategory,
     requestSerialize: serialize_klausapp_TimePeriod,
     requestDeserialize: deserialize_klausapp_TimePeriod,
-    responseSerialize: serialize_klausapp_TicketScoreOverTimePeriod,
-    responseDeserialize: deserialize_klausapp_TicketScoreOverTimePeriod,
+    responseSerialize: serialize_klausapp_TicketScoreByCategory,
+    responseDeserialize: deserialize_klausapp_TicketScoreByCategory,
   },
   getOverallScore: {
     path: '/klausapp.Klaus/getOverallScore',
