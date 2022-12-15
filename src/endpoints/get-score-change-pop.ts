@@ -42,7 +42,6 @@ export async function getScoreChangePoP(
             ratingsForSecondPeriod
         );
 
-        // TODO: make it float. Can be negative. Deal with it
         const change =
             ((secondPeriodOverallScore - firstPeriodOverallScore) /
                 firstPeriodOverallScore) *

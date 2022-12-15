@@ -7,8 +7,10 @@ import { mapErrorToResponse, validateTimePeriod } from "../utils";
 import { Db, getDb } from "../db";
 import _ from "lodash";
 import IntervalScore = CategoryScoreByInterval.IntervalScore;
+import { weekNumber } from "weeknumber";
 
 const db: Db = getDb();
+const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
 
 type NestedGroupedRatings = {
     [categoryId: string]: {
@@ -17,6 +19,7 @@ type NestedGroupedRatings = {
         ratingsByInterval: {
             [interval: string]: Array<any>;
         };
+        ratingSum: number;
     };
 };
 
@@ -29,6 +32,9 @@ export async function getCategoryScore(
         const startTime: number = startDate.getSeconds();
         const endTime: number = endDate.getSeconds();
 
+        const longerThanThirtyDays =
+            endTime - startTime >= 30 * ONE_DAY_IN_SECONDS;
+
         const ratingRows = await db.getRatingsWithCategories(
             startTime,
             endTime
@@ -37,19 +43,22 @@ export async function getCategoryScore(
         const categories = (ratingRows as Array<any>).reduce(
             (aggregator: NestedGroupedRatings, row) => {
                 const categoryId = row.rating_category_id;
-                const interval: string = new Date(
-                    row.created_at
-                ).toLocaleDateString("en-EN");
+                const createdAt = new Date(row.created_at);
+                const interval: string = longerThanThirtyDays
+                    ? weekNumber(createdAt).toString() // week no
+                    : createdAt.toLocaleDateString("en-EN"); // D/M/YY
 
                 if (_.has(aggregator, categoryId)) {
-                    if (_.has(aggregator[categoryId], interval)) {
-                        aggregator[categoryId]["ratingsByInterval"][
-                            interval
-                        ].push(row);
-                    } else {
+                    if (!_.has(aggregator[categoryId], interval)) {
                         aggregator[categoryId]["ratingsByInterval"][interval] =
-                            [row];
+                            [];
                     }
+
+                    aggregator[categoryId]["ratingsByInterval"][interval].push(
+                        row
+                    );
+                    aggregator[categoryId].ratingCount++;
+                    aggregator[categoryId].ratingSum += row.rating;
                 } else {
                     aggregator[categoryId] = {
                         name: row.name,
@@ -57,6 +66,7 @@ export async function getCategoryScore(
                         ratingsByInterval: {
                             [interval]: [row],
                         },
+                        ratingSum: row.rating,
                     };
                 }
 
@@ -66,12 +76,7 @@ export async function getCategoryScore(
         );
 
         _.forEach(categories, (category, categoryId: string) => {
-            const categoryScoreByInterval = new CategoryScoreByInterval();
             const scoresByInterval: Array<IntervalScore> = [];
-
-            categoryScoreByInterval.setId(Number(categoryId));
-            categoryScoreByInterval.setName(category.name);
-            categoryScoreByInterval.setRatingcount(category.ratingCount);
 
             _.forEach(
                 category.ratingsByInterval,
@@ -87,7 +92,15 @@ export async function getCategoryScore(
                 }
             );
 
+            const categoryScoreByInterval = new CategoryScoreByInterval();
+
+            categoryScoreByInterval.setId(Number(categoryId));
+            categoryScoreByInterval.setName(category.name);
+            categoryScoreByInterval.setRatingcount(category.ratingCount);
             categoryScoreByInterval.setScorebyintervalList(scoresByInterval);
+            categoryScoreByInterval.setOverallscore(
+                (category.ratingSum / category.ratingCount) * 20
+            );
 
             call.write(categoryScoreByInterval);
         });

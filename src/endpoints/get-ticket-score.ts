@@ -10,6 +10,12 @@ import CategoryScore = TicketScoreByCategory.CategoryScore;
 
 const db: Db = getDb();
 
+type NestedGroupedRatings = {
+    [ticketId: string]: {
+        [categoryId: string]: Array<any>;
+    };
+};
+
 export async function getTicketScore(
     call: ServerWritableStream<TimePeriod, TicketScoreByCategory>
 ) {
@@ -24,9 +30,8 @@ export async function getTicketScore(
             endTime
         );
 
-        // TODO: make a separate function for nested group bys
-        const ratingsByTicket = (ratingRows as Array<any>).reduce(
-            (aggregator, row) => {
+        const tickets = (ratingRows as Array<any>).reduce(
+            (aggregator: NestedGroupedRatings, row) => {
                 if (_.has(aggregator, row.ticket_id)) {
                     if (_.has(aggregator[row.ticket_id], row.category_id)) {
                         aggregator[row.ticket_id][row.category_id].push(row);
@@ -41,13 +46,10 @@ export async function getTicketScore(
 
                 return aggregator;
             },
-            {}
+            {} as NestedGroupedRatings
         );
 
-        _.forEach(ratingsByTicket, (ratingsByCategory, key) => {
-            const ticketScoreByCategory: TicketScoreByCategory =
-                new TicketScoreByCategory();
-            ticketScoreByCategory.setTicketid(Number(key));
+        _.forEach(tickets, (ratingsByCategory, key) => {
             const categoryScores: Array<CategoryScore> = [];
 
             _.forEach(ratingsByCategory, (ratings) => {
@@ -63,6 +65,9 @@ export async function getTicketScore(
                 categoryScores.push(categoryScore);
             });
 
+            const ticketScoreByCategory: TicketScoreByCategory =
+                new TicketScoreByCategory();
+            ticketScoreByCategory.setTicketid(Number(key));
             ticketScoreByCategory.setCategoryscoresList(categoryScores);
 
             call.write(ticketScoreByCategory);

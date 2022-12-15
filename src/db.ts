@@ -15,7 +15,7 @@ export class Db {
         endTime: string | number
     ) {
         return this.knexClient.raw(
-            "sSELECT *" +
+            "SELECT *" +
                 " FROM ratings as r" +
                 " LEFT JOIN rating_categories as c" +
                 " ON r.rating_category_id = c.id" +

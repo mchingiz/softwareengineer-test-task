@@ -33,7 +33,8 @@
         "lodash": "^4.17.21",
         "nodemon": "^2.0.20",
         "objection": "^3.0.1",
-        "sqlite3": "^5.1.2"
+        "sqlite3": "^5.1.2",
+        "weeknumber": "^1.2.1"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.46.1",

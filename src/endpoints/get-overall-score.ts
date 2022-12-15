@@ -17,8 +17,6 @@ export async function getOverallScore(
         const overallScore = new OverallScore();
         const [startDate, endDate] = validateTimePeriod(call.request);
 
-        const dateDiff = endDate.getSeconds() - startDate.getSeconds();
-
         const startTime: number = startDate.getSeconds();
         const endTime: number = endDate.getSeconds();
 
