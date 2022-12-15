@@ -16,6 +16,8 @@ export async function getScoreChangePoP(
     call: ServerUnaryCall<GetScoreChangePoPRequest, ScoreChangePoP>,
     callback: sendUnaryData<ScoreChangePoP>
 ) {
+    console.log("getScoreChangePoP call received");
+
     try {
         const scoreChangePoP = new ScoreChangePoP();
 
@@ -53,4 +55,5 @@ export async function getScoreChangePoP(
     } catch (err: any) {
         callback(mapErrorToResponse(err), null);
     }
+    console.log("getScoreChangePoP done");
 }

@@ -13,6 +13,8 @@ export async function getOverallScore(
     call: ServerUnaryCall<TimePeriod, OverallScore>,
     callback: sendUnaryData<OverallScore>
 ) {
+    console.log("getOverallScore call received");
+    throw new Error("smth");
     try {
         const overallScore = new OverallScore();
         const [startDate, endDate] = validateTimePeriod(call.request);
@@ -33,4 +35,6 @@ export async function getOverallScore(
     } catch (err: any) {
         callback(mapErrorToResponse(err), null);
     }
+
+    console.log("getOverallScore done");
 }

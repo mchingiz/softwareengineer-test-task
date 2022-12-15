@@ -26,6 +26,8 @@ type NestedGroupedRatings = {
 export async function getCategoryScore(
     call: ServerWritableStream<TimePeriod, CategoryScoreByInterval>
 ) {
+    console.log("getCategoryScore call received");
+
     try {
         const [startDate, endDate] = validateTimePeriod(call.request);
 
@@ -107,4 +109,6 @@ export async function getCategoryScore(
     } catch (err: any) {
         call.destroy(mapErrorToResponse(err));
     }
+
+    console.log("getCategoryScore done");
 }

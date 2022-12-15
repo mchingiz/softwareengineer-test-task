@@ -1,5 +1,5 @@
-import { assert } from 'chai';
-import { calculateWeightedScore } from '../src/utils';
+import { assert } from "chai";
+import { calculateWeightedScore } from "../src/utils";
 
 const onlyWeightlessRated = [
     { rating: 0, weight: 1 },
@@ -26,27 +26,26 @@ const randomSet2 = [
     { rating: 5, weight: 0 },
 ];
 
-
-describe('calculateWeightedScore', () => {
-    it('Score should be zero if only categories with zero weights has ratings', () => {
+describe("calculateWeightedScore", () => {
+    it("Score should be zero if only categories with zero weights has ratings", () => {
         const score = calculateWeightedScore(onlyWeightlessRated);
         assert.equal(score, 0);
-    })
+    });
 
-    it('Score should be max if all positive weight categories has max score', () => {
+    it("Score should be max if all positive weight categories has max score", () => {
         const score = calculateWeightedScore(allFiveExceptWeightless);
         assert.equal(score, 100);
-    })
+    });
 
-    describe('Random sets', () => {
-        it('Random set 1', () => {
+    describe("Random sets", () => {
+        it("Random set 1", () => {
             const score = calculateWeightedScore(randomSet1);
             assert.equal(score, 56);
-        })
+        });
 
-        it('Random set 2', () => {
+        it("Random set 2", () => {
             const score = calculateWeightedScore(randomSet2);
             assert.equal(score, 38);
-        })
-    })
-})
+        });
+    });
+});

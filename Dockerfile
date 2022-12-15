@@ -8,13 +8,8 @@ RUN npm ci
 
 COPY . .
 
-# download protoc-gen-grpc-web https://medium.com/front-end-weekly/implementation-of-grpc-in-web-and-server-with-typescript-165e8ca0155b
-# download protoc
+RUN npm run build    # compile TS
+RUN npm run start    # run with PM2
 
-# protoc-gen-js not found: https://github.com/grpc/grpc-web/issues/704#issuecomment-1215965557
-
-RUN npm run generate-ts-type-proto
-RUN npx tsc
-
-EXPOSE 4000
-CMD ["node", "dist/index.js"]
+EXPOSE 8080
+CMD ["node", "dist/src/index.js"]

@@ -1,7 +1,8 @@
 import { Server, ServerCredentials } from "@grpc/grpc-js";
 import { KlausService } from "../proto/server/klausapp_grpc_pb";
 import { KlausServer } from "./services";
-require('dotenv').config();
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const server = new Server();
 server.addService(KlausService, KlausServer);

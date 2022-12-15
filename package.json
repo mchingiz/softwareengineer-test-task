@@ -1,17 +1,22 @@
 {
+    "engines" : {
+        "npm" : ">=8.0.0 <9.0.0",
+        "node" : ">=18.0.0 <19.0.0"
+    },
     "name": "softwareengineer-test-task",
     "version": "1.0.0",
     "description": "As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).",
     "main": "src/index.ts",
     "scripts": {
-        "nodemon": "nodemon src/index.ts",
-        "sandbox": "nodemon sandbox.ts",
+        "build": "npx tsc",
+        "start": "npx pm2 start pm2.config.js",
+        "dev": "npx nodemon --exec \"node --inspect=0.0.0.0:9229 --require ts-node/register src/index.ts\"",
+        "sandbox": "npx nodemon sandbox.ts",
         "test": "mocha --require ts-node/register tests/*.test.ts",
-        "build-and-run": "npx tsc && node dist/src/index.js",
-        "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
-        "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto",
         "prettier": "npx prettier --write . --tab-width 4",
-        "lint": "npx eslint . --ext .ts"
+        "lint": "npx eslint . --ext .ts",
+        "generate-proto-code-for-server": "bash scripts/server.sh",
+        "generate-proto-code-for-client": "bash scripts/client.sh"
     },
     "repository": {
         "type": "git",
@@ -28,6 +33,7 @@
         "@grpc/proto-loader": "^0.7.4",
         "@types/google-protobuf": "^3.15.6",
         "@types/lodash": "^4.14.191",
+        "dotenv": "^16.0.3",
         "env": "^0.0.2",
         "grpc-web": "^1.4.2",
         "knex": "^2.3.0",

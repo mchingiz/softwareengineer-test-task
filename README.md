@@ -1,3 +1,6 @@
+# Hi dear Reviewer! :wave:
+You can take a look at my notes [here](NOTES_FOR_TASK.md)
+
 # Software Engineer Test Task
 
 As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).
