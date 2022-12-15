@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { validateTimePeriod } from '../src/utils';
-import {TimePeriod} from "../server/proto/klausapp_pb";
+import {TimePeriod} from "../proto/server/klausapp_pb";
 import {Timestamp} from "google-protobuf/google/protobuf/timestamp_pb";
 
 describe('validateTimePeriod', () => {

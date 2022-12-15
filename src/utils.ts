@@ -1,6 +1,6 @@
 import { ServerErrorResponse } from "@grpc/grpc-js";
 import { CustomError } from "./Error";
-import { TimePeriod } from "../server/proto/klausapp_pb";
+import { TimePeriod } from "../proto/server/klausapp_pb";
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
 
 export function calculateWeightedScore(

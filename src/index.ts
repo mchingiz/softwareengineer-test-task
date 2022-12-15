@@ -1,5 +1,5 @@
 import { Server, ServerCredentials } from "@grpc/grpc-js";
-import { KlausService } from "../server/proto/klausapp_grpc_pb";
+import { KlausService } from "../proto/server/klausapp_grpc_pb";
 import { KlausServer } from "./services";
 require('dotenv').config();
 

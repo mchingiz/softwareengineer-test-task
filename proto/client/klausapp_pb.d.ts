@@ -30,6 +30,9 @@ export namespace TimePeriod {
 }
 
 export class CategoryScoreByInterval extends jspb.Message {
+  getId(): number;
+  setId(value: number): CategoryScoreByInterval;
+
   getName(): string;
   setName(value: string): CategoryScoreByInterval;
 
@@ -54,6 +57,7 @@ export class CategoryScoreByInterval extends jspb.Message {
 
 export namespace CategoryScoreByInterval {
   export type AsObject = {
+    id: number,
     name: string,
     ratingcount: number,
     scorebyintervalList: Array<CategoryScoreByInterval.IntervalScore.AsObject>,

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROTO_DIR=./client/proto
+PROTO_DIR=./proto/client
 
 mkdir ${PROTO_DIR}
 

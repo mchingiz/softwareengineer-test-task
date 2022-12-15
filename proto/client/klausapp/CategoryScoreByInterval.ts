@@ -12,6 +12,7 @@ export interface _klausapp_CategoryScoreByInterval_IntervalScore__Output {
 }
 
 export interface CategoryScoreByInterval {
+  'id'?: (number);
   'name'?: (string);
   'ratingCount'?: (number);
   'scoreByInterval'?: (_klausapp_CategoryScoreByInterval_IntervalScore)[];
@@ -19,6 +20,7 @@ export interface CategoryScoreByInterval {
 }
 
 export interface CategoryScoreByInterval__Output {
+  'id': (number);
   'name': (string);
   'ratingCount': (number);
   'scoreByInterval': (_klausapp_CategoryScoreByInterval_IntervalScore__Output)[];

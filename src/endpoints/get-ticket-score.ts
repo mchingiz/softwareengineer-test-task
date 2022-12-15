@@ -2,7 +2,7 @@ import { ServerWritableStream } from "@grpc/grpc-js";
 import {
     TicketScoreByCategory,
     TimePeriod,
-} from "../../server/proto/klausapp_pb";
+} from "../../proto/server/klausapp_pb";
 import { mapErrorToResponse, validateTimePeriod } from "../utils";
 import _ from "lodash";
 import { Db, getDb } from "../db";

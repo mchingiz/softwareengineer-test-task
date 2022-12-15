@@ -1,5 +1,5 @@
 import { sendUnaryData, ServerUnaryCall } from "@grpc/grpc-js";
-import { OverallScore, TimePeriod } from "../../server/proto/klausapp_pb";
+import { OverallScore, TimePeriod } from "../../proto/server/klausapp_pb";
 import {
     calculateWeightedScore,
     mapErrorToResponse,

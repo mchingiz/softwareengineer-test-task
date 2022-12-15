@@ -2,7 +2,7 @@ import { sendUnaryData, ServerUnaryCall } from "@grpc/grpc-js";
 import {
     GetScoreChangePoPRequest,
     ScoreChangePoP,
-} from "../../server/proto/klausapp_pb";
+} from "../../proto/server/klausapp_pb";
 import {
     calculateWeightedScore,
     mapErrorToResponse,

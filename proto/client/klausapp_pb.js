@@ -401,7 +401,7 @@ proto.klausapp.TimePeriod.prototype.hasEnddate = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.klausapp.CategoryScoreByInterval.repeatedFields_ = [3];
+proto.klausapp.CategoryScoreByInterval.repeatedFields_ = [4];
 
 
 
@@ -434,11 +434,12 @@ proto.klausapp.CategoryScoreByInterval.prototype.toObject = function(opt_include
  */
 proto.klausapp.CategoryScoreByInterval.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    ratingcount: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    ratingcount: jspb.Message.getFieldWithDefault(msg, 3, 0),
     scorebyintervalList: jspb.Message.toObjectList(msg.getScorebyintervalList(),
     proto.klausapp.CategoryScoreByInterval.IntervalScore.toObject, includeInstance),
-    overallscore: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+    overallscore: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
   };
 
   if (includeInstance) {
@@ -476,19 +477,23 @@ proto.klausapp.CategoryScoreByInterval.deserializeBinaryFromReader = function(ms
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setId(value);
+      break;
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setRatingcount(value);
       break;
-    case 3:
+    case 4:
       var value = new proto.klausapp.CategoryScoreByInterval.IntervalScore;
       reader.readMessage(value,proto.klausapp.CategoryScoreByInterval.IntervalScore.deserializeBinaryFromReader);
       msg.addScorebyinterval(value);
       break;
-    case 4:
+    case 5:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setOverallscore(value);
       break;
@@ -521,24 +526,31 @@ proto.klausapp.CategoryScoreByInterval.prototype.serializeBinary = function() {
  */
 proto.klausapp.CategoryScoreByInterval.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
   f = message.getName();
   if (f.length > 0) {
     writer.writeString(
-      1,
+      2,
       f
     );
   }
   f = message.getRatingcount();
   if (f !== 0) {
     writer.writeInt32(
-      2,
+      3,
       f
     );
   }
   f = message.getScorebyintervalList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      3,
+      4,
       f,
       proto.klausapp.CategoryScoreByInterval.IntervalScore.serializeBinaryToWriter
     );
@@ -546,7 +558,7 @@ proto.klausapp.CategoryScoreByInterval.serializeBinaryToWriter = function(messag
   f = message.getOverallscore();
   if (f !== 0.0) {
     writer.writeFloat(
-      4,
+      5,
       f
     );
   }
@@ -714,11 +726,29 @@ proto.klausapp.CategoryScoreByInterval.IntervalScore.prototype.setScore = functi
 
 
 /**
- * optional string name = 1;
+ * optional int32 id = 1;
+ * @return {number}
+ */
+proto.klausapp.CategoryScoreByInterval.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.klausapp.CategoryScoreByInterval} returns this
+ */
+proto.klausapp.CategoryScoreByInterval.prototype.setId = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string name = 2;
  * @return {string}
  */
 proto.klausapp.CategoryScoreByInterval.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -727,16 +757,16 @@ proto.klausapp.CategoryScoreByInterval.prototype.getName = function() {
  * @return {!proto.klausapp.CategoryScoreByInterval} returns this
  */
 proto.klausapp.CategoryScoreByInterval.prototype.setName = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional int32 ratingCount = 2;
+ * optional int32 ratingCount = 3;
  * @return {number}
  */
 proto.klausapp.CategoryScoreByInterval.prototype.getRatingcount = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -745,17 +775,17 @@ proto.klausapp.CategoryScoreByInterval.prototype.getRatingcount = function() {
  * @return {!proto.klausapp.CategoryScoreByInterval} returns this
  */
 proto.klausapp.CategoryScoreByInterval.prototype.setRatingcount = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * repeated IntervalScore scoreByInterval = 3;
+ * repeated IntervalScore scoreByInterval = 4;
  * @return {!Array<!proto.klausapp.CategoryScoreByInterval.IntervalScore>}
  */
 proto.klausapp.CategoryScoreByInterval.prototype.getScorebyintervalList = function() {
   return /** @type{!Array<!proto.klausapp.CategoryScoreByInterval.IntervalScore>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.klausapp.CategoryScoreByInterval.IntervalScore, 3));
+    jspb.Message.getRepeatedWrapperField(this, proto.klausapp.CategoryScoreByInterval.IntervalScore, 4));
 };
 
 
@@ -764,7 +794,7 @@ proto.klausapp.CategoryScoreByInterval.prototype.getScorebyintervalList = functi
  * @return {!proto.klausapp.CategoryScoreByInterval} returns this
 */
 proto.klausapp.CategoryScoreByInterval.prototype.setScorebyintervalList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
 
 
@@ -774,7 +804,7 @@ proto.klausapp.CategoryScoreByInterval.prototype.setScorebyintervalList = functi
  * @return {!proto.klausapp.CategoryScoreByInterval.IntervalScore}
  */
 proto.klausapp.CategoryScoreByInterval.prototype.addScorebyinterval = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.klausapp.CategoryScoreByInterval.IntervalScore, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.klausapp.CategoryScoreByInterval.IntervalScore, opt_index);
 };
 
 
@@ -788,11 +818,11 @@ proto.klausapp.CategoryScoreByInterval.prototype.clearScorebyintervalList = func
 
 
 /**
- * optional float overallScore = 4;
+ * optional float overallScore = 5;
  * @return {number}
  */
 proto.klausapp.CategoryScoreByInterval.prototype.getOverallscore = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
 
@@ -801,7 +831,7 @@ proto.klausapp.CategoryScoreByInterval.prototype.getOverallscore = function() {
  * @return {!proto.klausapp.CategoryScoreByInterval} returns this
  */
 proto.klausapp.CategoryScoreByInterval.prototype.setOverallscore = function(value) {
-  return jspb.Message.setProto3FloatField(this, 4, value);
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 

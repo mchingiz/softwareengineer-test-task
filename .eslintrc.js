@@ -14,5 +14,5 @@ module.exports = {
     rules: {
         "@typescript-eslint/no-explicit-any": "off",
     },
-    ignorePatterns: ["client/*", "server/*", "sandbox.ts"],
+    ignorePatterns: ["proto/*", "sandbox.ts"],
 };
