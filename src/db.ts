@@ -4,7 +4,7 @@ import { Model } from "objection";
 let db: Db;
 
 export class Db {
-    knexClient: knex.Knex; // TODO: find type of this
+    knexClient: knex.Knex;
 
     constructor(knex: any) {
         this.knexClient = knex;

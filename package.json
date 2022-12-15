@@ -6,7 +6,7 @@
     "scripts": {
         "nodemon": "nodemon src/index.ts",
         "sandbox": "nodemon sandbox.ts",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha --require ts-node/register tests/*.test.ts",
         "build-and-run": "npx tsc && node dist/src/index.js",
         "generate-ts-type-proto": "npx proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=compiledProto/ proto/*.proto",
         "compile": "npx grpc_tools_node_protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=compiled-protos --ts_proto_opt=outputServices=generic-definitions,outputClientImpl=false,oneof=unions,snakeToCamel=false,esModuleInterop=true --proto_path=protos proto/klausapp.proto",
@@ -28,6 +28,7 @@
         "@grpc/proto-loader": "^0.7.4",
         "@types/google-protobuf": "^3.15.6",
         "@types/lodash": "^4.14.191",
+        "env": "^0.0.2",
         "grpc-web": "^1.4.2",
         "knex": "^2.3.0",
         "lodash": "^4.17.21",
@@ -37,14 +38,20 @@
         "weeknumber": "^1.2.1"
     },
     "devDependencies": {
+        "@types/chai": "^4.3.4",
+        "@types/mocha": "^10.0.1",
+        "@types/sinon": "^10.0.13",
         "@typescript-eslint/eslint-plugin": "^5.46.1",
         "@typescript-eslint/parser": "^5.46.1",
         "buffer": "^6.0.3",
+        "chai": "^4.3.7",
         "eslint": "^8.29.0",
         "grpc_tools_node_protoc_ts": "^5.3.2",
         "grpc-tools": "^1.12.3",
+        "mocha": "^10.2.0",
         "parcel": "^2.8.1",
         "prettier": "^2.8.1",
+        "sinon": "^15.0.0",
         "ts-node": "^10.9.1",
         "typescript": "^4.9.4"
     }
