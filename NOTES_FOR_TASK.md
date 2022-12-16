@@ -40,7 +40,9 @@ Requirements:
 
 It will run the container and mount our host directory to container, so that the code changes we make
 are immediately reflected in the container. But `node_modules` will be excluded from mounted folders
-because some dependencies has OS specific implementations. 3) Switch to folder `/app` and install the dependencies in container: `npm install` 4) Run the application with `npm run dev`
+because some dependencies has OS specific implementations.
+3) Switch to folder `/app` and install the dependencies in container: `npm install`
+4) Run the application with `npm run dev`
 
 Project will be accessible on port `8080` and the debugger on `9229`
 

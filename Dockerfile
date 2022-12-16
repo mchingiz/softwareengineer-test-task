@@ -1,4 +1,5 @@
 FROM node:18-alpine
+RUN apk add g++ make py3-pip
 
 WORKDIR /app
 
@@ -8,8 +9,8 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build    # compile TS
-RUN npm run start    # run with PM2
-
 EXPOSE 8080
+
+RUN npm run build    # compile TS
+
 CMD ["node", "dist/src/index.js"]

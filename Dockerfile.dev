@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 RUN apk add --update
 
-RUN apk add bash
+RUN apk add g++ make py3-pip bash
 
 EXPOSE 8080
 EXPOSE 9229
