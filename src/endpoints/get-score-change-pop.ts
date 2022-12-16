@@ -8,16 +8,14 @@ import {
     mapErrorToResponse,
     validateTimePeriod,
 } from "../utils";
-import { Db, getDb } from "../db";
+import { Db } from "../db";
 
-const db: Db = getDb();
+const db: Db = Db.getSingleton();
 
 export async function getScoreChangePoP(
     call: ServerUnaryCall<GetScoreChangePoPRequest, ScoreChangePoP>,
     callback: sendUnaryData<ScoreChangePoP>
 ) {
-    console.log("getScoreChangePoP call received");
-
     try {
         const scoreChangePoP = new ScoreChangePoP();
 
@@ -55,5 +53,4 @@ export async function getScoreChangePoP(
     } catch (err: any) {
         callback(mapErrorToResponse(err), null);
     }
-    console.log("getScoreChangePoP done");
 }

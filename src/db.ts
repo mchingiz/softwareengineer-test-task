@@ -6,8 +6,26 @@ let db: Db;
 export class Db {
     knexClient: knex.Knex;
 
-    constructor(knex: any) {
+    private constructor(knex: any) {
         this.knexClient = knex;
+    }
+
+    static getSingleton(): Db {
+        if (!db) {
+            const knexClient = knex.knex({
+                client: "sqlite3",
+                useNullAsDefault: true,
+                connection: {
+                    filename: "./database.db",
+                },
+            });
+
+            Model.knex(knexClient);
+
+            db = new Db(knexClient);
+        }
+
+        return db;
     }
 
     public getRatingsWithCategories(
@@ -38,22 +56,4 @@ export class Db {
                 ` WHERE unixepoch(r.created_at) BETWEEN ${startTime} AND ${endTime}`
         );
     }
-}
-
-export function getDb(): Db {
-    if (!db) {
-        const knexClient = knex.knex({
-            client: "sqlite3",
-            useNullAsDefault: true,
-            connection: {
-                filename: "./database.db",
-            },
-        });
-
-        Model.knex(knexClient);
-
-        db = new Db(knexClient);
-    }
-
-    return db;
 }

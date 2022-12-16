@@ -1,4 +1,4 @@
-# Hi dear Reviewer! :wave:
+# Hi Klaus people! :wave:
 You can take a look at my notes [here](NOTES_FOR_TASK.md)
 
 # Software Engineer Test Task

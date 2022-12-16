@@ -1,7 +1,7 @@
 {
-    "engines" : {
-        "npm" : ">=8.0.0 <9.0.0",
-        "node" : ">=18.0.0 <19.0.0"
+    "engines": {
+        "npm": ">=8.0.0 <9.0.0",
+        "node": ">=18.0.0 <19.0.0"
     },
     "name": "softwareengineer-test-task",
     "version": "1.0.0",
@@ -10,9 +10,9 @@
     "scripts": {
         "build": "npx tsc",
         "start": "npx pm2 start pm2.config.js",
-        "dev": "npx nodemon --exec \"node --inspect=0.0.0.0:9229 --require ts-node/register src/index.ts\"",
+        "dev": "npx nodemon --watch src --exec \"node --inspect=0.0.0.0:9229 --require ts-node/register src/index.ts\"",
         "sandbox": "npx nodemon sandbox.ts",
-        "test": "mocha --require ts-node/register tests/*.test.ts",
+        "test": "mocha --exit --recursive --require ts-node/register $(find . -name '*.test.ts')",
         "prettier": "npx prettier --write . --tab-width 4",
         "lint": "npx eslint . --ext .ts",
         "generate-proto-code-for-server": "bash scripts/server.sh",

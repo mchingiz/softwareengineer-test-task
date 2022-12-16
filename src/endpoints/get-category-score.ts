@@ -4,12 +4,12 @@ import {
     TimePeriod,
 } from "../../proto/server/klausapp_pb";
 import { mapErrorToResponse, validateTimePeriod } from "../utils";
-import { Db, getDb } from "../db";
+import { Db } from "../db";
 import _ from "lodash";
 import IntervalScore = CategoryScoreByInterval.IntervalScore;
 import { weekNumber } from "weeknumber";
 
-const db: Db = getDb();
+const db: Db = Db.getSingleton();
 const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
 
 type NestedGroupedRatings = {
@@ -26,8 +26,6 @@ type NestedGroupedRatings = {
 export async function getCategoryScore(
     call: ServerWritableStream<TimePeriod, CategoryScoreByInterval>
 ) {
-    console.log("getCategoryScore call received");
-
     try {
         const [startDate, endDate] = validateTimePeriod(call.request);
 
@@ -106,9 +104,9 @@ export async function getCategoryScore(
 
             call.write(categoryScoreByInterval);
         });
+
+        call.end();
     } catch (err: any) {
         call.destroy(mapErrorToResponse(err));
     }
-
-    console.log("getCategoryScore done");
 }

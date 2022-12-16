@@ -5,10 +5,10 @@ import {
 } from "../../proto/server/klausapp_pb";
 import { mapErrorToResponse, validateTimePeriod } from "../utils";
 import _ from "lodash";
-import { Db, getDb } from "../db";
+import { Db } from "../db";
 import CategoryScore = TicketScoreByCategory.CategoryScore;
 
-const db: Db = getDb();
+const db: Db = Db.getSingleton();
 
 type NestedGroupedRatings = {
     [ticketId: string]: {
@@ -19,8 +19,6 @@ type NestedGroupedRatings = {
 export async function getTicketScore(
     call: ServerWritableStream<TimePeriod, TicketScoreByCategory>
 ) {
-    console.log("getTicketScore call received");
-
     try {
         const [startDate, endDate] = validateTimePeriod(call.request);
 
@@ -79,6 +77,4 @@ export async function getTicketScore(
     } catch (err: any) {
         call.destroy(mapErrorToResponse(err));
     }
-
-    console.log("getTicketScore done");
 }

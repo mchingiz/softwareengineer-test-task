@@ -5,16 +5,14 @@ import {
     mapErrorToResponse,
     validateTimePeriod,
 } from "../utils";
-import { Db, getDb } from "./../db";
+import { Db } from "./../db";
 
-const db: Db = getDb();
+const db: Db = Db.getSingleton();
 
 export async function getOverallScore(
     call: ServerUnaryCall<TimePeriod, OverallScore>,
     callback: sendUnaryData<OverallScore>
 ) {
-    console.log("getOverallScore call received");
-    throw new Error("smth");
     try {
         const overallScore = new OverallScore();
         const [startDate, endDate] = validateTimePeriod(call.request);
@@ -31,10 +29,8 @@ export async function getOverallScore(
 
         overallScore.setScore(score);
 
-        callback(null, overallScore);
+        return callback(null, overallScore);
     } catch (err: any) {
         callback(mapErrorToResponse(err), null);
     }
-
-    console.log("getOverallScore done");
 }
